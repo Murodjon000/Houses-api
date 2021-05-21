@@ -3,10 +3,10 @@ class Api::V1::UsersController < ApiController
 
   def create
     user = User.create!(user_params)
-    if user
+    if user.valid?
       render json: { token: JsonWebToken.encode(sub: user.id) }
     else
-      render json: { errors: ['Invalid email or password'] }, status: 401
+      render json: { errors: ['Invalid email or password'] }, status: 422
     end
   end
 
