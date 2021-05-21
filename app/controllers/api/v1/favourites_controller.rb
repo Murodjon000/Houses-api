@@ -12,9 +12,9 @@ class Api::V1::FavouritesController < ApiController
     favourite = current_user.favourites.new(set_params)
 
     if favourite.save
-      render json: favourite, status: 201
+      render json: favourite
     else
-      render json: { error: 'House was not added to the favourites.' }, status: 404
+      render json: { error: 'House was not added to the favourites.' }
     end
   end
 
