@@ -1,7 +1,6 @@
 class Api::V1::UsersController < ApiController
   before_action :ensure_params_exist, only: :create
   skip_before_action :authenticate_user!, only: %i[create user_params ensure_params_exist]
-  skip_before_filter :verify_authenticity_token, :only => :create
 
   def create
     user = User.new(user_params)
