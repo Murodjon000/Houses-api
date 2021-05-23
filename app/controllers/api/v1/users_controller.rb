@@ -1,12 +1,14 @@
 class Api::V1::UsersController < ApiController
-  skip_before_action :authenticate_user!, only: %i[create user_params]
+  before_action :ensure_params_exist, only: :create
+  skip_before_action :authenticate_user!, only: %i[create user_params ensure_params_exist]
+  skip_before_filter :verify_authenticity_token, :only => :create
 
   def create
-    user = User.create(user_params)
-    if user.valid?
-      render json: { token: JsonWebToken.encode(sub: user.id) }
+    user = User.new(user_params)
+    if user.save
+      render json: { token: JsonWebToken.encode(sub: user.id), data: { user: user } }
     else
-      render json: { errors: ['Invalid email or password'] }, status: 422
+      render json: { errors: ['Invalid email or password'] },  status: :unprocessable_entity
     end
   end
 
@@ -21,5 +23,12 @@ class Api::V1::UsersController < ApiController
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
+  end
+
+  def ensure_params_exist
+    return if params[:user].present?
+    render json: {
+        messages: "Missing Params",
+      }, status: :bad_request
   end
 end
