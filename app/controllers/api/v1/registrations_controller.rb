@@ -1,6 +1,7 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   skip_before_action :authenticate_user!
+  before_action :user_params
   
   def create
     if params[:email].nil?
