@@ -5,8 +5,8 @@
 
 # Read more: https://github.com/cyu/rack-cors
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
-    # for development
-  allow do
+   # for development
+   allow do
     origins 'http://localhost:3000'
   
     resource '*',
@@ -17,7 +17,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   
     # for production
   allow do
-    origins 'https://lit-fjord-74995.herokuapp.com'
+    origins 'https://find-your-house-react.netlify.app'
   
     resource '*',
       headers: :any,
