@@ -1,7 +1,7 @@
 class Api::V1::FavouritesController < ApiController
   def index
     favourites = current_user.favourited_houses
-    render json: favourites, status: 200
+    render json: { user: current_user, favourites: favourites }
   end
-
+  
 end
