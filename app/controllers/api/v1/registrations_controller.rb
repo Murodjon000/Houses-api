@@ -33,6 +33,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 
   
   def user_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, :username, :access_code])
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 end
