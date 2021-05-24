@@ -1,6 +1,7 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
   respond_to :json
-
+  skip_before_action :authenticate_user!
+  
   def create
     if params[:email].nil?
       render json: {message: 'User request must contain the user email.'}, status: 400,
