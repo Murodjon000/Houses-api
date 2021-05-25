@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :favourited_houses, through: :favourites, source: :house
 
   validates :username, uniqueness: true, presence: true, length: {minimum: 3, maximum: 15}
+  validates_confirmation_of :password
 end
