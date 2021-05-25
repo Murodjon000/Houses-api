@@ -1,13 +1,29 @@
 class Api::V1::UsersController < ApiController
-  before_action :ensure_params_exist, only: :create
-  skip_before_action :authenticate_user!, only: %i[create user_params ensure_params_exist]
+  skip_before_action :authenticate_user!, only: %i[create user_params ]
 
   def create
-    user = User.new(user_params)
-    if user.save
-      render json: { token: JsonWebToken.encode(sub: user.id), data: { user: user } }
+    if params[:user][:email].nil?
+      render json: { message: 'User request must contain the user email.' }, status: 400
+      return
+    elsif params[:user][:password].nil?
+      render  json: { message: 'User request must contain the user password.' }, status: 400
+      return
+    end
+
+    if params[:user][:email]
+      duplicate_user = User.find_by_email(params[:user][:email])
+      unless duplicate_user.nil?
+        render json: { message: 'Duplicate email. A user already exists with that email address.' }, status: 409
+        return
+      end
+    end
+
+    @user = User.create(user_params)
+
+    if @user.save
+      render json: {status: 200, token: JsonWebToken.encode(sub: @user.id)}
     else
-      render json: { errors: ['Invalid email or password'] },  status: :unprocessable_entity
+      render json: {message: @user.errors.full_messages}, status: 400
     end
   end
 
@@ -24,10 +40,4 @@ class Api::V1::UsersController < ApiController
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
-  def ensure_params_exist
-    return if params[:user].present?
-    render json: {
-        messages: "Missing Params",
-      }, status: :bad_request
-  end
 end

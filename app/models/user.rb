@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :favourites
   has_many :favourited_houses, through: :favourites, source: :house
 
-  validates :username, uniqueness: true, presence: true
+  validates :username, uniqueness: true, presence: true, length: {minimum: 3, maximum: 15}
 end
