@@ -1,3 +1,15 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+
+  namespace :api do
+    namespace :v1 do
+      post :auth, to: "authentication#create"
+      resources :favourites
+      resources :users
+      resources :houses, only: [:index, :show] do
+        post 'favourite', to: 'houses#favourite'
+        post 'unfavourite', to: 'houses#unfavourite'
+      end
+    end
+  end
 end
