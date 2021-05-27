@@ -11,9 +11,10 @@ This REST API was built with Ruby on Rails, and Postgres for the databases as th
 - Houses and Favourites can be seen only by authorized users
 - To authorize users, this app uses JWT and  Devise
 - For cross site policy Rack-cors was used  
+
 ## Front-end
 
-- The backend API for this project created by me and can be found in [github](https://github.com/Murodjon000/houses-frontendi).
+- The frontend of this project created by me and can be found in [github](https://github.com/Murodjon000/houses-frontend).
 
 ## Built with
 
