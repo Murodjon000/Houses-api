@@ -6,10 +6,11 @@ Rails.application.routes.draw do
       post :auth, to: "authentication#create"
       resources :favourites
       resources :users
-      resources :houses, only: [:index, :show] do
+      resources :houses do
         post 'favourite', to: 'houses#favourite'
         post 'unfavourite', to: 'houses#unfavourite'
       end
+      post '/presigned_url', to: 'direct_upload#create'
     end
   end
 
