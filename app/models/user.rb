@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "Must be valid email address" }
 
   has_one_attached :avatar
-
+  has_many :houses
   def self.avatar_url(avatar)
     if avatar.attached?
       avatar.blob.service_url
