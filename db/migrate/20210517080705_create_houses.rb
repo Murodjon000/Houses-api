@@ -8,7 +8,6 @@ class CreateHouses < ActiveRecord::Migration[6.1]
       t.string :location
       t.date :built_date
       t.integer :number_of_rooms
-
       t.timestamps
     end
   end

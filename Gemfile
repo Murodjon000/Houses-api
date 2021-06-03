@@ -26,6 +26,8 @@ gem 'devise'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'jwt'
 gem 'rack-cors'
+gem 'aws-sdk-s3'
+gem 'dotenv-rails'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
