@@ -13,9 +13,9 @@ RSpec.describe House, type: :model do
     it { should validate_presence_of(:description) }
     it { should validate_presence_of(:price) }
     it { should validate_numericality_of(:price) }
-    it { should validate_presence_of(:built_date) }
-    it { should validate_presence_of(:number_of_rooms) }
-    it { should validate_numericality_of(:number_of_rooms) }
+    it { should validate_presence_of(:date) }
+    it { should validate_presence_of(:rooms) }
+    it { should validate_numericality_of(:rooms) }
     it { should validate_presence_of(:location) }
   end
 end

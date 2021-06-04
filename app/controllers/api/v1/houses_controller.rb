@@ -56,6 +56,6 @@ class Api::V1::HousesController < ApiController
   private
   
   def house_params
-    params.require(:house).permit(:name, :description, :price, :built_date, :number_of_rooms, :location, :image, :house_image)
+    params.require(:house).permit(:name, :description, :price, :date, :rooms, :location, :image, :house_image)
   end
 end

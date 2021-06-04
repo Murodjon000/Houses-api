@@ -56,13 +56,13 @@ ActiveRecord::Schema.define(version: 2021_06_01_063531) do
     t.string "name"
     t.text "description"
     t.integer "price"
+    t.string "image"
     t.string "location"
-    t.date "built_date"
-    t.integer "number_of_rooms"
+    t.date "date"
+    t.integer "rooms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
-    t.string "image"
     t.index ["user_id"], name: "index_houses_on_user_id"
   end
 
