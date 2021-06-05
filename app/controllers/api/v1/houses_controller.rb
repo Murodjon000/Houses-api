@@ -1,4 +1,5 @@
 class Api::V1::HousesController < ApiController
+  skip_before_action :authenticate_user!
   def index
     houses = House.all
     render json: houses, status: 200
